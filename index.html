@@ -1,0 +1,116 @@
+﻿<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Сказочный тест — рабочий макет</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg" aria-hidden="true"></div>
+  <div class="hero hero-left" aria-hidden="true">
+    <img src="images/hero-left.png" alt="" />
+  </div>
+  <div class="hero hero-right" aria-hidden="true">
+    <img src="images/hero-right.png" alt="" />
+  </div>
+
+  <header class="top">
+    <div class="brand">
+      <div class="badge">Сказка</div>
+      <div>
+        <h1>Сказочный тест</h1>
+        <p>Рабочий макет для детского квиза с озвучкой и анимациями</p>
+      </div>
+    </div>
+    <div class="cta">
+      <button class="btn ghost" id="toggleAnim">Анимации: вкл</button>
+      <button class="btn" id="audioToggle">Озвучка: авто</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="card home" id="screenHome" aria-live="polite">
+      <h2>Выбор теста</h2>
+      <p class="muted">Сейчас доступен один тест, позже добавим новые сказки.</p>
+      <div class="test-list">
+        <button class="test-card" id="testKoshkin">
+          <span class="test-title">Кошкин дом</span>
+          <span class="test-sub">3 раунда по 3 вопроса</span>
+        </button>
+        <div class="test-card disabled" aria-disabled="true">
+          <span class="test-title">Скоро новые сказки</span>
+          <span class="test-sub">Появятся в будущем</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="card round hidden" id="screenRound" aria-live="polite">
+      <h2 id="roundTitle">Раунд 1</h2>
+      <p id="roundInfo" class="round-info">Скоро здесь будет описание раунда.</p>
+      <button class="btn" id="roundStartBtn">Начать раунд</button>
+    </section>
+
+    <section class="card quiz hidden" id="screenQuiz" aria-live="polite">
+      <div class="quiz-head">
+        <div class="progress">
+          <div class="bar" id="progressBar"></div>
+        </div>
+        <div class="counter" id="counter">Вопрос 1 из 9</div>
+      </div>
+
+      <h2 id="questionText">Вопрос</h2>
+
+      <div class="controls">
+        <button class="btn speak" id="speakQuestionBtn">Озвучить вопрос</button>
+        <button class="btn speak ghost" id="speakAnswersBtn">Озвучить ответы</button>
+        <div class="chip" id="hint">Подсказка: —</div>
+      </div>
+
+      <div class="feedback" id="feedback" role="alert" aria-live="assertive"></div>
+
+      <div class="answers" id="answers">
+        <!-- ответы рендерятся скриптом -->
+      </div>
+
+      <div class="quiz-foot">
+        <button class="btn ghost" id="prevBtn">Назад</button>
+        <button class="btn" id="nextBtn" disabled>Дальше</button>
+      </div>
+    </section>
+
+    <section class="card result hidden" id="screenResult" aria-live="polite">
+      <h2>Поздравляем!</h2>
+      <p>Ты прошел тест по сказке «Кошкин дом».</p>
+      <div class="result-actions">
+        <button class="btn" id="restartBtn">Пройти еще раз</button>
+        <button class="btn ghost" id="homeBtn">К списку тестов</button>
+      </div>
+    </section>
+
+    <aside class="card panel">
+      <h3>Пулл вопросов</h3>
+      <p class="muted">Пока здесь демо-набор. Заменим на твой список, когда он будет готов.</p>
+      <ol class="pool" id="pool"></ol>
+
+      <div class="divider"></div>
+      <h3>Заметки по макету</h3>
+      <ul class="notes">
+        <li>Озвучка планируется через MP3-файлы (в папке `audio`).</li>
+        <li>Подготовлено место для героев PNG по краям экрана.</li>
+        <li>Анимации можно выключить для слабых устройств.</li>
+        <li>Сайт рассчитан на незрячих и слабовидящих детей.</li>
+      </ul>
+    </aside>
+  </main>
+
+  <footer class="footer">
+    <span>Макет v0.1</span>
+    <span>Готов к деплою как статический сайт</span>
+  </footer>
+
+  <div class="sr-only" id="liveRegion" aria-live="assertive"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
