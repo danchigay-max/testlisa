@@ -3,24 +3,18 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Сказочный тест — рабочий макет</title>
+  <title>Кошкин дом — викторина по сказке</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="bg" aria-hidden="true"></div>
-  <div class="hero hero-left" aria-hidden="true">
-    <img src="images/hero-left.png" alt="" />
-  </div>
-  <div class="hero hero-right" aria-hidden="true">
-    <img src="images/hero-right.png" alt="" />
-  </div>
 
   <header class="top">
     <div class="brand">
       <div class="badge">Сказка</div>
       <div>
-        <h1>Сказочный тест</h1>
-        <p>Рабочий макет для детского квиза с озвучкой и анимациями</p>
+        <h1>Кошкин дом</h1>
+        <p>Викторина по сказке С. Я. Маршака</p>
       </div>
     </div>
     <div class="cta">
@@ -30,27 +24,52 @@
   </header>
 
   <main class="layout">
+
+    <!-- Экран выбора теста -->
     <section class="card home" id="screenHome" aria-live="polite">
-      <h2>Выбор теста</h2>
-      <p class="muted">Сейчас доступен один тест, позже добавим новые сказки.</p>
-      <div class="test-list">
-        <button class="test-card" id="testKoshkin">
-          <span class="test-title">Кошкин дом</span>
-          <span class="test-sub">3 раунда по 3 вопроса</span>
-        </button>
-        <div class="test-card disabled" aria-disabled="true">
-          <span class="test-title">Скоро новые сказки</span>
-          <span class="test-sub">Появятся в будущем</span>
+      <div class="home-split">
+        <div class="home-cover">
+          <img src="images/cover.png" alt="Кошкин дом — викторина по сказке" />
+        </div>
+        <div class="home-tests">
+          <h2>Выбор теста</h2>
+          <p class="muted">Сейчас доступен один тест, позже добавим новые сказки.</p>
+          <div class="test-list">
+            <button class="test-card" id="testKoshkin">
+              <span class="test-title">Кошкин дом</span>
+              <span class="test-sub">3 раунда по 3 вопроса</span>
+            </button>
+            <div class="test-card disabled" aria-disabled="true">
+              <span class="test-title">Скоро новые сказки</span>
+              <span class="test-sub">Появятся в будущем</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="card round hidden" id="screenRound" aria-live="polite">
-      <h2 id="roundTitle">Раунд 1</h2>
-      <p id="roundInfo" class="round-info">Скоро здесь будет описание раунда.</p>
+    <!-- Экран приветствия -->
+    <section class="card intro hidden" id="screenIntro" aria-live="polite">
+      <div class="intro-split">
+        <img class="intro-hero" src="images/макаримушка машет.png" alt="Макаримушка" />
+        <div class="intro-content">
+          <h2>Приветствие</h2>
+          <p class="intro-text" id="introText"></p>
+          <button class="btn" id="introStartBtn">Начать викторину</button>
+        </div>
+        <img class="intro-hero" src="images/кролик машет.png" alt="Кролик Ириска" />
+      </div>
+    </section>
+
+    <!-- Экран объявления раунда -->
+    <section class="card round-announce hidden" id="screenRound" aria-live="polite">
+      <div class="round-badge" id="roundTitle">Раунд 1</div>
+      <h2 class="round-subtitle" id="roundSubtitle">«Кто есть кто?»</h2>
+      <p id="roundInfo" class="round-info"></p>
       <button class="btn" id="roundStartBtn">Начать раунд</button>
     </section>
 
+    <!-- Экран вопроса -->
     <section class="card quiz hidden" id="screenQuiz" aria-live="polite">
       <div class="quiz-head">
         <div class="progress">
@@ -63,50 +82,57 @@
 
       <div class="controls">
         <button class="btn speak" id="speakQuestionBtn">Озвучить вопрос</button>
-        <button class="btn speak ghost" id="speakAnswersBtn">Озвучить ответы</button>
-        <div class="chip" id="hint">Подсказка: —</div>
       </div>
 
       <div class="feedback" id="feedback" role="alert" aria-live="assertive"></div>
 
-      <div class="answers" id="answers">
-        <!-- ответы рендерятся скриптом -->
+      <!-- Ответы + герой сбоку -->
+      <div class="answers-row" id="answersRow">
+        <img id="quizHero" class="quiz-hero" alt="" />
+        <div class="answers" id="answers"></div>
       </div>
 
       <div class="quiz-foot">
         <button class="btn ghost" id="prevBtn">Назад</button>
-        <button class="btn" id="nextBtn" disabled>Дальше</button>
+        <div class="quiz-foot-right">
+          <div class="loader-wrap hidden" id="loaderWrap">
+            <div class="loader-ring">
+              <svg viewBox="0 0 48 48" class="loader-svg">
+                <circle cx="24" cy="24" r="20" class="loader-bg" fill="none" stroke="#e3f2fd" stroke-width="4" />
+                <circle cx="24" cy="24" r="20" class="loader-fg" fill="none" stroke="#1565c0" stroke-width="4"
+                  stroke-dasharray="125.6" stroke-dashoffset="125.6" stroke-linecap="round" />
+              </svg>
+            </div>
+            <span class="loader-text" id="loaderCountdown"></span>
+          </div>
+          <button class="btn" id="nextBtn" disabled>Дальше</button>
+        </div>
       </div>
     </section>
 
+    <!-- Экран результата -->
     <section class="card result hidden" id="screenResult" aria-live="polite">
-      <h2>Поздравляем!</h2>
-      <p>Ты прошел тест по сказке «Кошкин дом».</p>
-      <div class="result-actions">
-        <button class="btn" id="restartBtn">Пройти еще раз</button>
-        <button class="btn ghost" id="homeBtn">К списку тестов</button>
+      <div class="result-split">
+        <img class="result-hero" src="images/макаримушка поздравляет.png" alt="Макаримушка" />
+        <div class="result-content">
+          <h2 id="resultTitle">Поздравляем!</h2>
+          <p class="result-text" id="resultText"></p>
+          <div class="result-actions">
+            <button class="btn" id="restartBtn">Пройти ещё раз</button>
+            <button class="btn ghost" id="homeBtn">К списку тестов</button>
+          </div>
+        </div>
+        <img class="result-hero" src="images/кролик поздравляет.png" alt="Кролик Ириска" />
       </div>
+
+      <div class="confetti-container" id="confettiContainer" aria-hidden="true"></div>
     </section>
 
-    <aside class="card panel">
-      <h3>Пулл вопросов</h3>
-      <p class="muted">Пока здесь демо-набор. Заменим на твой список, когда он будет готов.</p>
-      <ol class="pool" id="pool"></ol>
-
-      <div class="divider"></div>
-      <h3>Заметки по макету</h3>
-      <ul class="notes">
-        <li>Озвучка планируется через MP3-файлы (в папке `audio`).</li>
-        <li>Подготовлено место для героев PNG по краям экрана.</li>
-        <li>Анимации можно выключить для слабых устройств.</li>
-        <li>Сайт рассчитан на незрячих и слабовидящих детей.</li>
-      </ul>
-    </aside>
   </main>
 
   <footer class="footer">
-    <span>Макет v0.1</span>
-    <span>Готов к деплою как статический сайт</span>
+    <span>Кошкин дом — викторина</span>
+    <span>Сказка С. Я. Маршака</span>
   </footer>
 
   <div class="sr-only" id="liveRegion" aria-live="assertive"></div>

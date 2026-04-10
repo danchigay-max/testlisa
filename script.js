@@ -1,54 +1,61 @@
 ﻿const testData = {
   id: "koshkin-dom",
   title: "Кошкин дом",
+  heroes: {
+    quiz: [
+      "images/макаримушка.png",
+      "images/кролик.png",
+      "images/макаримушка машет.png",
+      "images/кролик 2.png"
+    ]
+  },
+  intro: {
+    text: "Всем привет! Я — Макаримушка. Я всё на свете знаю про сказки! А я — кролик Ириска! Мы попали в волшебную страну, где живёт Кошка из сказки Самуила Маршака! Готовы? Тогда ушки на макушке! Погнали!",
+    audio: "audio/koshkin-dom/привет. слово.mp3"
+  },
   rounds: [
     {
       title: "Раунд 1",
-      info: "Вступление к первому раунду будет здесь.",
-      audio: "audio/koshkin-dom/round-1.mp3",
+      subtitle: "«Кто есть кто?»",
+      info: "В этом раунде нужно отгадать персонажа по описанию.",
+      audio: "audio/koshkin-dom/1 раунд.mp3",
       questions: [
         {
-          text: "Кто был хозяином красивого дома в сказке?",
-          answers: ["Кошка", "Собака", "Лиса", "Лошадь"],
-          correctIndex: 0,
-          hint: "Главная героиня",
+          text: "Этот герой ходит в сапожках, носит серьги, и платье.",
+          answers: ["Кот Василий", "Кошка", "Коза"],
+          correctIndex: 1,
           audio: {
-            question: "audio/koshkin-dom/r1q1-question.mp3",
+            question: "audio/koshkin-dom/1 вопрос.mp3",
             answers: [
-              "audio/koshkin-dom/r1q1-a1.mp3",
-              "audio/koshkin-dom/r1q1-a2.mp3",
-              "audio/koshkin-dom/r1q1-a3.mp3",
-              "audio/koshkin-dom/r1q1-a4.mp3"
+              "audio/koshkin-dom/кот василий 1 вопр 1 ответ.mp3",
+              "audio/koshkin-dom/кошка 2 отв 1 вопр.mp3",
+              "audio/koshkin-dom/коза 1 вопр 3 отв.mp3"
             ]
           }
         },
         {
-          text: "Кого кошка не пустила в дом?",
-          answers: ["Котят", "Соседей", "Гостей", "Птиц"],
+          text: "Боевой гость, который любит петь по утрам. У него есть жена-наседка.",
+          answers: ["Петух", "Попугай", "Кот Василий"],
           correctIndex: 0,
-          hint: "Ее родня",
           audio: {
-            question: "audio/koshkin-dom/r1q2-question.mp3",
+            question: "audio/koshkin-dom/2 вопрос.mp3",
             answers: [
-              "audio/koshkin-dom/r1q2-a1.mp3",
-              "audio/koshkin-dom/r1q2-a2.mp3",
-              "audio/koshkin-dom/r1q2-a3.mp3",
-              "audio/koshkin-dom/r1q2-a4.mp3"
+              "audio/koshkin-dom/петух 2 вопр 2 ответ.mp3",
+              "audio/koshkin-dom/попугай 2 вопр 1 ответ.mp3",
+              "audio/koshkin-dom/кот василий 1 вопр 1 ответ.mp3"
             ]
           }
         },
         {
-          text: "Что случилось с домом кошки?",
-          answers: ["Сгорел", "Улетел", "Потонул", "Стал больше"],
-          correctIndex: 0,
-          hint: "Беда из-за огня",
+          text: "Двое родственников, которые стучались под окно богатой тёти, чтобы их пустили переночевать.",
+          answers: ["Цыплята", "Поросята", "Котята"],
+          correctIndex: 2,
           audio: {
-            question: "audio/koshkin-dom/r1q3-question.mp3",
+            question: "audio/koshkin-dom/3 вопрос.mp3",
             answers: [
-              "audio/koshkin-dom/r1q3-a1.mp3",
-              "audio/koshkin-dom/r1q3-a2.mp3",
-              "audio/koshkin-dom/r1q3-a3.mp3",
-              "audio/koshkin-dom/r1q3-a4.mp3"
+              "audio/koshkin-dom/цыплята 3 вопр 1 отв.mp3",
+              "audio/koshkin-dom/поросята 3 вопр 2 отв.mp3",
+              "audio/koshkin-dom/котята 3 вопр 3 отв.mp3"
             ]
           }
         }
@@ -56,51 +63,46 @@
     },
     {
       title: "Раунд 2",
-      info: "Вступление ко второму раунду будет здесь.",
-      audio: "audio/koshkin-dom/round-2.mp3",
+      subtitle: "«Кто это сказал?»",
+      info: "Ведущий зачитывает фразу из сказки. Задача — вспомнить, кто её произнёс.",
+      audio: "audio/koshkin-dom/раунд 2.mp3",
       questions: [
         {
-          text: "Кто первым приютил кошку после пожара?",
-          answers: ["Котята", "Козы", "Петух", "Свинья"],
-          correctIndex: 0,
-          hint: "Те, кого она обидела",
+          text: "«Какой позор! Была сама котёнком я когда-то.»",
+          answers: ["Коза", "Кошка", "Корова"],
+          correctIndex: 1,
           audio: {
-            question: "audio/koshkin-dom/r2q1-question.mp3",
+            question: "audio/koshkin-dom/2 раунд 1 вопрос.mp3",
             answers: [
-              "audio/koshkin-dom/r2q1-a1.mp3",
-              "audio/koshkin-dom/r2q1-a2.mp3",
-              "audio/koshkin-dom/r2q1-a3.mp3",
-              "audio/koshkin-dom/r2q1-a4.mp3"
+              "audio/koshkin-dom/коза 2 раунд 1 вопр 1 отв.mp3",
+              "audio/koshkin-dom/кошка 2 раунд 2 вопр 1 отв.mp3",
+              "audio/koshkin-dom/корова 2 раунд 1 вопр 2 отв.mp3"
             ]
           }
         },
         {
-          text: "Какая черта характера изменилась у кошки?",
-          answers: ["Стала добрее", "Стала злее", "Стала ленивее", "Стала громче"],
-          correctIndex: 0,
-          hint: "Про дружбу и заботу",
+          text: "«Вот это стол — на нём сидят!..»",
+          answers: ["Кошка", "Мышка", "Хрюшка"],
+          correctIndex: 2,
           audio: {
-            question: "audio/koshkin-dom/r2q2-question.mp3",
+            question: "audio/koshkin-dom/2 раунд 2 вопр.mp3",
             answers: [
-              "audio/koshkin-dom/r2q2-a1.mp3",
-              "audio/koshkin-dom/r2q2-a2.mp3",
-              "audio/koshkin-dom/r2q2-a3.mp3",
-              "audio/koshkin-dom/r2q2-a4.mp3"
+              "audio/koshkin-dom/кошка 2 раунд 2 вопр 1 отв.mp3",
+              "audio/koshkin-dom/мышка 2 раунд 2 вопр 2 отв.mp3",
+              "audio/koshkin-dom/хрюшка 2 раунд 2 вопр 3 отв.mp3"
             ]
           }
         },
         {
-          text: "Кто помог кошке построить новый дом?",
-          answers: ["Котята", "Куры", "Гуси", "Лягушки"],
+          text: "«Борода твоя долга, да не выросли рога».",
+          answers: ["Коза", "Корова", "Лошадка"],
           correctIndex: 0,
-          hint: "Ее семья",
           audio: {
-            question: "audio/koshkin-dom/r2q3-question.mp3",
+            question: "audio/koshkin-dom/2 раунд 3 вопр.mp3",
             answers: [
-              "audio/koshkin-dom/r2q3-a1.mp3",
-              "audio/koshkin-dom/r2q3-a2.mp3",
-              "audio/koshkin-dom/r2q3-a3.mp3",
-              "audio/koshkin-dom/r2q3-a4.mp3"
+              "audio/koshkin-dom/коза 2 раунд 3 вопр 1 отв.mp3",
+              "audio/koshkin-dom/корова 2 раунд 1 вопр 2 отв.mp3",
+              "audio/koshkin-dom/лошадка 2 раунд 3 вопр 2 отв.mp3"
             ]
           }
         }
@@ -108,68 +110,64 @@
     },
     {
       title: "Раунд 3",
-      info: "Вступление к третьему раунду будет здесь.",
-      audio: "audio/koshkin-dom/round-3.mp3",
+      subtitle: "«Что в сундучке?»",
+      info: "Вопросы о предметах, которые встречаются в сказке.",
+      audio: "audio/koshkin-dom/3 раунд.mp3",
       questions: [
         {
-          text: "Какой урок дает сказка?",
-          answers: ["Нужно помогать близким", "Нужно быть самым богатым", "Нужно всегда спорить", "Нужно все прятать"],
-          correctIndex: 0,
-          hint: "Про доброту",
+          text: "Какое музыкальное «чудо» купила кошка у одного осла?",
+          answers: ["Пианино", "Барабан", "Гитару"],
+          correctIndex: 2,
           audio: {
-            question: "audio/koshkin-dom/r3q1-question.mp3",
+            question: "audio/koshkin-dom/3 раунд 1 вопр.mp3",
             answers: [
-              "audio/koshkin-dom/r3q1-a1.mp3",
-              "audio/koshkin-dom/r3q1-a2.mp3",
-              "audio/koshkin-dom/r3q1-a3.mp3",
-              "audio/koshkin-dom/r3q1-a4.mp3"
+              "audio/koshkin-dom/пианино 3 раунд 1 вопр 1 отв.mp3",
+              "audio/koshkin-dom/барабан 3 раунд 1 вопр 2 отв.mp3",
+              "audio/koshkin-dom/гитара 3 раунд 1 вопр 3 отв.mp3"
             ]
           }
         },
         {
-          text: "Кто остался рядом с кошкой после беды?",
-          answers: ["Котята", "Соседи", "Гости", "Слуги"],
-          correctIndex: 0,
-          hint: "Самые родные",
+          text: "Чем был украшен ковёр на лестнице в доме кошки?",
+          answers: ["Цветами", "Золотым узором", "Рыбками"],
+          correctIndex: 1,
           audio: {
-            question: "audio/koshkin-dom/r3q2-question.mp3",
+            question: "audio/koshkin-dom/3 раунд 2 вопр.mp3",
             answers: [
-              "audio/koshkin-dom/r3q2-a1.mp3",
-              "audio/koshkin-dom/r3q2-a2.mp3",
-              "audio/koshkin-dom/r3q2-a3.mp3",
-              "audio/koshkin-dom/r3q2-a4.mp3"
+              "audio/koshkin-dom/цветы 3 раунд 2 вопр 1 отв.mp3",
+              "audio/koshkin-dom/золотой узор 3 раунд 2 вопр 2 отв.mp3",
+              "audio/koshkin-dom/рыбки 3 раунд 2 вопр 3 отв.mp3"
             ]
           }
         },
         {
-          text: "Чем заканчивается сказка?",
-          answers: ["Все живут дружно", "Все уходят", "Дом остается пустым", "Кошка исчезает"],
-          correctIndex: 0,
-          hint: "Счастливый конец",
+          text: "Сколько поросят было у свиньи?",
+          answers: ["7", "3", "10"],
+          correctIndex: 2,
           audio: {
-            question: "audio/koshkin-dom/r3q3-question.mp3",
+            question: "audio/koshkin-dom/3 раунд 3 вопр.mp3",
             answers: [
-              "audio/koshkin-dom/r3q3-a1.mp3",
-              "audio/koshkin-dom/r3q3-a2.mp3",
-              "audio/koshkin-dom/r3q3-a3.mp3",
-              "audio/koshkin-dom/r3q3-a4.mp3"
+              "audio/koshkin-dom/7 3 раунд 3 вопр 1 отв.mp3",
+              "audio/koshkin-dom/3 3 раунд 3 вопр 2 отв.mp3",
+              "audio/koshkin-dom/10 3 раунд 3 вопр 3 отв.mp3"
             ]
           }
         }
       ]
     }
   ],
-  audio: {
-    correct: "audio/koshkin-dom/correct.mp3",
-    wrong: "audio/koshkin-dom/wrong.mp3",
-    complete: "audio/koshkin-dom/complete.mp3"
+  outro: {
+    text: "Вот и всё, друзья. Сказка закончилась, но не уходит далеко. Вы сегодня были молодцы — слушали, отвечали, не боялись ошибаться. Кошка с котятами теперь живут дружно, а мы прощаемся… до новой сказки!",
+    audio: "audio/koshkin-dom/заключение.mp3"
   }
 };
 
 let state = {
   roundIndex: 0,
   questionIndex: 0,
-  answers: {}
+  answers: {},
+  autoNextTimer: null,
+  countdownInterval: null
 };
 
 let animEnabled = true;
@@ -178,6 +176,7 @@ let audioUnlocked = false;
 let currentAudio = null;
 
 const screenHome = document.getElementById("screenHome");
+const screenIntro = document.getElementById("screenIntro");
 const screenRound = document.getElementById("screenRound");
 const screenQuiz = document.getElementById("screenQuiz");
 const screenResult = document.getElementById("screenResult");
@@ -186,28 +185,36 @@ const questionText = document.getElementById("questionText");
 const answersEl = document.getElementById("answers");
 const counter = document.getElementById("counter");
 const progressBar = document.getElementById("progressBar");
-const pool = document.getElementById("pool");
-const hintEl = document.getElementById("hint");
 const feedback = document.getElementById("feedback");
 const liveRegion = document.getElementById("liveRegion");
 
 const nextBtn = document.getElementById("nextBtn");
 const prevBtn = document.getElementById("prevBtn");
 const speakQuestionBtn = document.getElementById("speakQuestionBtn");
-const speakAnswersBtn = document.getElementById("speakAnswersBtn");
 const toggleAnim = document.getElementById("toggleAnim");
 const audioToggle = document.getElementById("audioToggle");
 
 const testKoshkin = document.getElementById("testKoshkin");
 const roundTitle = document.getElementById("roundTitle");
+const roundSubtitle = document.getElementById("roundSubtitle");
 const roundInfo = document.getElementById("roundInfo");
 const roundStartBtn = document.getElementById("roundStartBtn");
+const introText = document.getElementById("introText");
+const introStartBtn = document.getElementById("introStartBtn");
 
 const restartBtn = document.getElementById("restartBtn");
 const homeBtn = document.getElementById("homeBtn");
 
+const resultTitle = document.getElementById("resultTitle");
+const resultText = document.getElementById("resultText");
+const loaderWrap = document.getElementById("loaderWrap");
+const loaderCountdown = document.getElementById("loaderCountdown");
+const confettiContainer = document.getElementById("confettiContainer");
+const quizHero = document.getElementById("quizHero");
+const answersRow = document.getElementById("answersRow");
+
 function showScreen(screen) {
-  [screenHome, screenRound, screenQuiz, screenResult].forEach((el) => {
+  [screenHome, screenIntro, screenRound, screenQuiz, screenResult].forEach((el) => {
     el.classList.add("hidden");
   });
   screen.classList.remove("hidden");
@@ -228,35 +235,18 @@ function stopAudio() {
   }
 }
 
-function playAudio(src) {
+function playAudio(src, onEnd) {
   if (!src) return;
   stopAudio();
   currentAudio = new Audio(src);
   currentAudio.play().then(() => {
     audioUnlocked = true;
-  }).catch(() => {
-    // Автовоспроизведение может быть запрещено.
-  });
-}
-
-function playSequence(srcList = []) {
-  if (!srcList.length) return;
-  stopAudio();
-  let index = 0;
-  const playNext = () => {
-    if (index >= srcList.length) return;
-    currentAudio = new Audio(srcList[index]);
-    currentAudio.play().then(() => {
-      audioUnlocked = true;
-    }).catch(() => {
-      // Игнорируем блокировку автозвука.
-    });
+  }).catch(() => {});
+  if (onEnd) {
     currentAudio.addEventListener("ended", () => {
-      index += 1;
-      playNext();
-    });
-  };
-  playNext();
+      onEnd();
+    }, { once: true });
+  }
 }
 
 function totalQuestions() {
@@ -279,37 +269,108 @@ function answerKey(roundIndex, questionIndex) {
   return `${roundIndex}-${questionIndex}`;
 }
 
-function renderPool() {
-  pool.innerHTML = "";
-  testData.rounds.forEach((round, rIndex) => {
-    round.questions.forEach((q, qIndex) => {
-      const li = document.createElement("li");
-      li.textContent = `${round.title}: ${q.text}`;
-      li.dataset.key = answerKey(rIndex, qIndex);
-      pool.appendChild(li);
-    });
-  });
+function clearAutoNext() {
+  if (state.autoNextTimer) {
+    clearTimeout(state.autoNextTimer);
+    state.autoNextTimer = null;
+  }
+  if (state.countdownInterval) {
+    clearInterval(state.countdownInterval);
+    state.countdownInterval = null;
+  }
+  hideLoader();
+}
+
+function showLoader(text) {
+  loaderWrap.classList.remove("hidden");
+  loaderCountdown.textContent = text || "";
+  loaderCountdown.classList.remove("countdown-number");
+}
+
+function hideLoader() {
+  loaderWrap.classList.add("hidden");
+  loaderCountdown.textContent = "";
+}
+
+function showCountdown(seconds, callback) {
+  let count = seconds;
+  loaderCountdown.textContent = count;
+  loaderCountdown.classList.add("countdown-number");
+  loaderWrap.classList.remove("hidden");
+  state.countdownInterval = setInterval(() => {
+    count--;
+    if (count <= 0) {
+      clearInterval(state.countdownInterval);
+      state.countdownInterval = null;
+      loaderCountdown.textContent = "";
+      callback();
+    } else {
+      loaderCountdown.textContent = count;
+    }
+  }, 1000);
+}
+
+function setQuizHero(questionGlobalIndex) {
+  const heroIndex = questionGlobalIndex % testData.heroes.quiz.length;
+  quizHero.src = testData.heroes.quiz[heroIndex];
+  quizHero.alt = "";
+
+  // Чередование: чётные — герой слева, нечётные — справа
+  if (questionGlobalIndex % 2 === 0) {
+    answersRow.classList.remove("hero-right");
+    answersRow.classList.add("hero-left");
+  } else {
+    answersRow.classList.remove("hero-left");
+    answersRow.classList.add("hero-right");
+  }
+}
+
+function launchConfetti() {
+  confettiContainer.innerHTML = "";
+  const colors = ["#1565c0", "#42a5f5", "#0d47a1", "#1e88e5", "#64b5f6", "#ffc107", "#ff9800"];
+  const shapes = ["■", "●", "▲", "★", "♦", "✦"];
+  for (let i = 0; i < 60; i++) {
+    const el = document.createElement("span");
+    el.className = "confetti";
+    el.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+    el.style.color = colors[Math.floor(Math.random() * colors.length)];
+    el.style.left = Math.random() * 100 + "%";
+    el.style.animationDelay = Math.random() * 2 + "s";
+    el.style.animationDuration = (2 + Math.random() * 3) + "s";
+    el.style.fontSize = (12 + Math.random() * 18) + "px";
+    confettiContainer.appendChild(el);
+  }
+  setTimeout(() => {
+    confettiContainer.innerHTML = "";
+  }, 6000);
 }
 
 function renderRoundScreen() {
+  clearAutoNext();
   const round = testData.rounds[state.roundIndex];
-  roundTitle.textContent = `${round.title}`;
+  roundTitle.textContent = round.title;
+  roundSubtitle.textContent = round.subtitle;
   roundInfo.textContent = round.info;
   showScreen(screenRound);
-  announce(`${round.title}. ${round.info}`);
+  announce(`${round.title}. ${round.subtitle}. ${round.info}`);
   if (autoAudio) playAudio(round.audio);
 }
 
 function renderQuestion({ silent = false } = {}) {
+  clearAutoNext();
   const q = currentQuestion();
   const key = answerKey(state.roundIndex, state.questionIndex);
   const saved = state.answers[key] || { selectedIndex: null, correct: false, wrongIndexes: [] };
 
-  questionText.textContent = q.text;
-  hintEl.textContent = `Подсказка: ${q.hint}`;
-  feedback.textContent = saved.feedback || "";
-
   const indexInTest = flatIndex(state.roundIndex, state.questionIndex) + 1;
+
+  // Герой вопроса
+  setQuizHero(indexInTest - 1);
+
+  questionText.textContent = q.text;
+  feedback.textContent = saved.feedback || "";
+  feedback.className = "feedback";
+
   counter.textContent = `Вопрос ${indexInTest} из ${totalQuestions()}`;
   progressBar.style.width = `${(indexInTest / totalQuestions()) * 100}%`;
 
@@ -347,21 +408,51 @@ function selectAnswer(index) {
   const key = answerKey(state.roundIndex, state.questionIndex);
   const saved = state.answers[key] || { selectedIndex: null, correct: false, wrongIndexes: [] };
 
+  if (saved.correct) return;
+
   saved.selectedIndex = index;
 
   if (index === q.correctIndex) {
     saved.correct = true;
-    saved.feedback = "Правильно!";
-    announce("Правильно");
-    if (autoAudio) playAudio(testData.audio.correct);
+    saved.feedback = "Правильно! Молодец!";
+    announce("Правильно! Молодец!");
+
+    const isLastQuestion = (state.roundIndex === testData.rounds.length - 1) &&
+                           (state.questionIndex === testData.rounds[state.roundIndex].questions.length - 1);
+
+    if (autoAudio) {
+      playAudio(q.audio.answers[index], () => {
+        if (isLastQuestion) {
+          showCountdown(3, () => {
+            goNext();
+          });
+        } else {
+          showLoader("Следующий вопрос через…");
+          state.autoNextTimer = setTimeout(() => {
+            goNext();
+          }, 3000);
+        }
+      });
+    } else {
+      if (isLastQuestion) {
+        showCountdown(3, () => {
+          goNext();
+        });
+      } else {
+        showLoader("Следующий вопрос через…");
+        state.autoNextTimer = setTimeout(() => {
+          goNext();
+        }, 3000);
+      }
+    }
   } else {
     saved.correct = false;
     if (!saved.wrongIndexes.includes(index)) {
       saved.wrongIndexes.push(index);
     }
-    saved.feedback = "Неверно. Попробуй еще раз.";
-    announce("Неверно. Попробуй еще раз.");
-    if (autoAudio) playAudio(testData.audio.wrong);
+    saved.feedback = "Неверно. Попробуй ещё раз!";
+    announce("Неверно. Попробуй ещё раз!");
+    if (autoAudio) playAudio(q.audio.answers[index]);
   }
 
   state.answers[key] = saved;
@@ -369,6 +460,7 @@ function selectAnswer(index) {
 }
 
 function goNext() {
+  clearAutoNext();
   const round = testData.rounds[state.roundIndex];
   if (state.questionIndex < round.questions.length - 1) {
     state.questionIndex += 1;
@@ -383,12 +475,11 @@ function goNext() {
     return;
   }
 
-  showScreen(screenResult);
-  announce("Поздравляем! Ты прошел тест.");
-  if (autoAudio) playAudio(testData.audio.complete);
+  renderResultScreen();
 }
 
 function goPrev() {
+  clearAutoNext();
   if (state.questionIndex > 0) {
     state.questionIndex -= 1;
   } else if (state.roundIndex > 0) {
@@ -399,7 +490,29 @@ function goPrev() {
   renderQuestion();
 }
 
+function renderResultScreen() {
+  clearAutoNext();
+  resultTitle.textContent = "Поздравляем!";
+  resultText.textContent = testData.outro.text;
+  showScreen(screenResult);
+  announce("Поздравляем! Ты прошёл тест по сказке Кошкин дом!");
+  launchConfetti();
+  if (autoAudio) playAudio(testData.outro.audio);
+}
+
 function startTest() {
+  state = { roundIndex: 0, questionIndex: 0, answers: {} };
+  renderIntroScreen();
+}
+
+function renderIntroScreen() {
+  introText.textContent = testData.intro.text;
+  showScreen(screenIntro);
+  announce(testData.intro.text);
+  if (autoAudio) playAudio(testData.intro.audio);
+}
+
+function startQuizFromIntro() {
   state = { roundIndex: 0, questionIndex: 0, answers: {} };
   renderRoundScreen();
 }
@@ -426,16 +539,13 @@ function speakQuestion() {
   playAudio(q.audio.question);
 }
 
-function speakAnswers() {
-  const q = currentQuestion();
-  playSequence(q.audio.answers);
-}
-
 function unlockAudio() {
   audioUnlocked = true;
 }
 
 function goHome() {
+  clearAutoNext();
+  confettiContainer.innerHTML = "";
   showScreen(screenHome);
 }
 
@@ -453,11 +563,15 @@ roundStartBtn.addEventListener("click", () => {
   startRound();
 });
 
+introStartBtn.addEventListener("click", () => {
+  unlockAudio();
+  startQuizFromIntro();
+});
+
 nextBtn.addEventListener("click", goNext);
 prevBtn.addEventListener("click", goPrev);
 
 speakQuestionBtn.addEventListener("click", speakQuestion);
-speakAnswersBtn.addEventListener("click", speakAnswers);
 
 toggleAnim.addEventListener("click", toggleAnimations);
 audioToggle.addEventListener("click", toggleAudioMode);
@@ -474,4 +588,3 @@ document.body.classList.add("anim");
 toggleAnim.setAttribute("aria-pressed", "true");
 audioToggle.setAttribute("aria-pressed", "true");
 showScreen(screenHome);
-renderPool();
