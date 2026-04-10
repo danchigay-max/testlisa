@@ -91,21 +91,6 @@ p {
   margin: 0 auto;
   gap: 28px;
   padding: 24px 6vw 80px;
-  align-items: start;
-}
-
-/* Специфично для экранов приветствия и результата — по центру */
-.intro,
-.result {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 70vh;
-}
-
-.intro .intro-split,
-.result .result-split {
-  width: 100%;
 }
 
 .card {
@@ -115,8 +100,6 @@ p {
   padding: 36px;
   position: relative;
   z-index: 1;
-  width: 100%;
-  margin: 0 auto;
 }
 
 /* ===== Главная: split ===== */
@@ -151,12 +134,11 @@ p {
   gap: 36px;
   align-items: center;
   justify-content: center;
-  width: 100%;
 }
 
 .intro-hero {
   flex: 0 0 26%;
-  max-width: 340px;
+  max-width: 140px;
   min-width: 200px;
   height: auto;
   display: block;
@@ -504,7 +486,6 @@ p {
   gap: 36px;
   align-items: center;
   justify-content: center;
-  width: 100%;
 }
 
 .result-hero {
@@ -755,13 +736,6 @@ button:focus-visible,
     padding: 16px 4vw 80px;
   }
 
-  /* На мобильных убираем min-height, центрирование */
-  .intro,
-  .result {
-    display: block;
-    min-height: auto;
-  }
-
   .footer {
     flex-direction: column;
     gap: 8px;
@@ -783,6 +757,7 @@ button:focus-visible,
 
   /* На мобильных герои сверху/снизу */
   .intro-split {
+    
     flex-direction: column;
     text-align: center;
   }
