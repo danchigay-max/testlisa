@@ -75,7 +75,7 @@
             question: "audio/koshkin-dom/2 раунд 1 вопрос.mp3",
             answers: [
               "audio/koshkin-dom/коза 2 раунд 1 вопр 1 отв.mp3",
-              "audio/koshkin-dom/кошка 2 раунд 2 вопр 1 отв.mp3",
+              "audio/koshkin-dom/кошка 2 отв 1 вопр.mp3",
               "audio/koshkin-dom/корова 2 раунд 1 вопр 2 отв.mp3"
             ]
           }
@@ -174,6 +174,14 @@ let animEnabled = true;
 let autoAudio = true;
 let audioUnlocked = false;
 let currentAudio = null;
+const settingsStorageKey = "koshkinDomA11ySettings";
+
+const defaultA11ySettings = {
+  fontScale: 100,
+  spacing: "normal",
+  uiScale: "100",
+  theme: "blue"
+};
 
 const screenHome = document.getElementById("screenHome");
 const screenIntro = document.getElementById("screenIntro");
@@ -212,12 +220,79 @@ const loaderCountdown = document.getElementById("loaderCountdown");
 const confettiContainer = document.getElementById("confettiContainer");
 const quizHero = document.getElementById("quizHero");
 const answersRow = document.getElementById("answersRow");
+const fontRange = document.getElementById("fontRange");
+const fontRangeValue = document.getElementById("fontRangeValue");
+const spaceNormal = document.getElementById("spaceNormal");
+const spaceWide = document.getElementById("spaceWide");
+const spaceWidest = document.getElementById("spaceWidest");
+const scale95 = document.getElementById("scale95");
+const scale100 = document.getElementById("scale100");
+const scale110 = document.getElementById("scale110");
+const themeBlue = document.getElementById("themeBlue");
+const themeLightDark = document.getElementById("themeLightDark");
+const themeDarkLight = document.getElementById("themeDarkLight");
+const themeBook = document.getElementById("themeBook");
+const themeBrownGreen = document.getElementById("themeBrownGreen");
 
 function showScreen(screen) {
   [screenHome, screenIntro, screenRound, screenQuiz, screenResult].forEach((el) => {
     el.classList.add("hidden");
   });
   screen.classList.remove("hidden");
+}
+
+function setActiveButton(buttons, activeButton) {
+  buttons.forEach((btn) => {
+    btn.classList.toggle("is-active", btn === activeButton);
+    btn.setAttribute("aria-pressed", String(btn === activeButton));
+  });
+}
+
+function saveA11ySettings() {
+  const payload = {
+    fontScale: Number(fontRange.value) || defaultA11ySettings.fontScale,
+    spacing: document.body.dataset.spacing || defaultA11ySettings.spacing,
+    uiScale: document.body.dataset.uiScale || defaultA11ySettings.uiScale,
+    theme: document.body.dataset.theme || defaultA11ySettings.theme
+  };
+  localStorage.setItem(settingsStorageKey, JSON.stringify(payload));
+}
+
+function applyA11ySettings(settings) {
+  const parsedScale = Number(settings.fontScale);
+  const safeScale = Number.isFinite(parsedScale) ? Math.min(130, Math.max(85, parsedScale)) : defaultA11ySettings.fontScale;
+
+  document.body.dataset.spacing = settings.spacing;
+  document.body.dataset.uiScale = settings.uiScale;
+  document.body.dataset.theme = settings.theme;
+  document.documentElement.style.setProperty("--font-scale", String(safeScale / 100));
+  fontRange.value = String(safeScale);
+  fontRangeValue.textContent = `${safeScale}%`;
+
+  setActiveButton([spaceNormal, spaceWide, spaceWidest], settings.spacing === "wide" ? spaceWide : settings.spacing === "widest" ? spaceWidest : spaceNormal);
+  setActiveButton([scale95, scale100, scale110], settings.uiScale === "95" ? scale95 : settings.uiScale === "110" ? scale110 : scale100);
+  setActiveButton([themeBlue, themeLightDark, themeDarkLight, themeBook, themeBrownGreen],
+    settings.theme === "blue" ? themeBlue :
+    settings.theme === "light-dark" ? themeLightDark :
+    settings.theme === "dark-light" ? themeDarkLight :
+      settings.theme === "book" ? themeBook :
+        settings.theme === "brown-green" ? themeBrownGreen : themeBlue);
+}
+
+function loadA11ySettings() {
+  try {
+    const raw = localStorage.getItem(settingsStorageKey);
+    if (!raw) return defaultA11ySettings;
+    const parsed = JSON.parse(raw);
+    const loaded = { ...defaultA11ySettings, ...parsed };
+    if (Object.prototype.hasOwnProperty.call(parsed, "fontSize") && !Object.prototype.hasOwnProperty.call(parsed, "fontScale")) {
+      loaded.theme = "blue";
+    }
+    loaded.fontScale = Number(loaded.fontScale) || defaultA11ySettings.fontScale;
+    return loaded;
+  } catch (error) {
+    return defaultA11ySettings;
+  }
 }
 
 function announce(text) {
@@ -579,6 +654,126 @@ audioToggle.addEventListener("click", toggleAudioMode);
 restartBtn.addEventListener("click", restartTest);
 homeBtn.addEventListener("click", goHome);
 
+fontRange.addEventListener("input", () => {
+  applyA11ySettings({
+    fontScale: Number(fontRange.value),
+    spacing: document.body.dataset.spacing,
+    uiScale: document.body.dataset.uiScale,
+    theme: document.body.dataset.theme
+  });
+  saveA11ySettings();
+});
+
+spaceNormal.addEventListener("click", () => {
+  applyA11ySettings({
+    fontScale: Number(fontRange.value),
+    spacing: "normal",
+    uiScale: document.body.dataset.uiScale,
+    theme: document.body.dataset.theme
+  });
+  saveA11ySettings();
+});
+
+spaceWide.addEventListener("click", () => {
+  applyA11ySettings({
+    fontScale: Number(fontRange.value),
+    spacing: "wide",
+    uiScale: document.body.dataset.uiScale,
+    theme: document.body.dataset.theme
+  });
+  saveA11ySettings();
+});
+
+spaceWidest.addEventListener("click", () => {
+  applyA11ySettings({
+    fontScale: Number(fontRange.value),
+    spacing: "widest",
+    uiScale: document.body.dataset.uiScale,
+    theme: document.body.dataset.theme
+  });
+  saveA11ySettings();
+});
+
+scale95.addEventListener("click", () => {
+  applyA11ySettings({
+    fontScale: Number(fontRange.value),
+    spacing: document.body.dataset.spacing,
+    uiScale: "95",
+    theme: document.body.dataset.theme
+  });
+  saveA11ySettings();
+});
+
+scale100.addEventListener("click", () => {
+  applyA11ySettings({
+    fontScale: Number(fontRange.value),
+    spacing: document.body.dataset.spacing,
+    uiScale: "100",
+    theme: document.body.dataset.theme
+  });
+  saveA11ySettings();
+});
+
+scale110.addEventListener("click", () => {
+  applyA11ySettings({
+    fontScale: Number(fontRange.value),
+    spacing: document.body.dataset.spacing,
+    uiScale: "110",
+    theme: document.body.dataset.theme
+  });
+  saveA11ySettings();
+});
+
+themeBlue.addEventListener("click", () => {
+  applyA11ySettings({
+    fontScale: Number(fontRange.value),
+    spacing: document.body.dataset.spacing,
+    uiScale: document.body.dataset.uiScale,
+    theme: "blue"
+  });
+  saveA11ySettings();
+});
+
+themeLightDark.addEventListener("click", () => {
+  applyA11ySettings({
+    fontScale: Number(fontRange.value),
+    spacing: document.body.dataset.spacing,
+    uiScale: document.body.dataset.uiScale,
+    theme: "light-dark"
+  });
+  saveA11ySettings();
+});
+
+themeDarkLight.addEventListener("click", () => {
+  applyA11ySettings({
+    fontScale: Number(fontRange.value),
+    spacing: document.body.dataset.spacing,
+    uiScale: document.body.dataset.uiScale,
+    theme: "dark-light"
+  });
+  saveA11ySettings();
+});
+
+themeBook.addEventListener("click", () => {
+  applyA11ySettings({
+    fontScale: Number(fontRange.value),
+    spacing: document.body.dataset.spacing,
+    uiScale: document.body.dataset.uiScale,
+    theme: "book"
+  });
+  saveA11ySettings();
+});
+
+themeBrownGreen.addEventListener("click", () => {
+  applyA11ySettings({
+    fontScale: Number(fontRange.value),
+    spacing: document.body.dataset.spacing,
+    uiScale: document.body.dataset.uiScale,
+    theme: "brown-green"
+  });
+  saveA11ySettings();
+});
+
 window.addEventListener("keydown", (event) => {
   if (event.key === "ArrowRight") goNext();
   if (event.key === "ArrowLeft") goPrev();
@@ -587,4 +782,5 @@ window.addEventListener("keydown", (event) => {
 document.body.classList.add("anim");
 toggleAnim.setAttribute("aria-pressed", "true");
 audioToggle.setAttribute("aria-pressed", "true");
+applyA11ySettings(loadA11ySettings());
 showScreen(screenHome);
