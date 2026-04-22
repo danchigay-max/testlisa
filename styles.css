@@ -666,6 +666,7 @@ body[data-theme="brown-green"] #prevBtn:hover {
 .answer {
   border: 2px solid var(--border-soft);
   background: var(--surface-soft);
+  color: var(--ink);
   padding: calc(18px * var(--space-scale) * var(--ui-scale)) calc(24px * var(--space-scale) * var(--ui-scale));
   border-radius: 18px;
   font-weight: 600;
