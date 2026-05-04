@@ -174,6 +174,9 @@ let animEnabled = true;
 let autoAudio = true;
 let audioUnlocked = false;
 let currentAudio = null;
+let hoverAudio = null;
+let hoverAudioTimer = null;
+const hoverDelayMs = 650;
 const settingsStorageKey = "koshkinDomA11ySettings";
 
 const defaultA11ySettings = {
@@ -201,6 +204,8 @@ const prevBtn = document.getElementById("prevBtn");
 const speakQuestionBtn = document.getElementById("speakQuestionBtn");
 const toggleAnim = document.getElementById("toggleAnim");
 const audioToggle = document.getElementById("audioToggle");
+const a11yPanel = document.getElementById("a11yPanel");
+const a11yToggle = document.getElementById("a11yToggle");
 
 const testKoshkin = document.getElementById("testKoshkin");
 const roundTitle = document.getElementById("roundTitle");
@@ -234,11 +239,46 @@ const themeDarkLight = document.getElementById("themeDarkLight");
 const themeBook = document.getElementById("themeBook");
 const themeBrownGreen = document.getElementById("themeBrownGreen");
 
+const hoverAudioMap = {
+  roundStartBtn: "audio/buttons/я хочу начать раунд.mp3",
+  restartBtn: "audio/buttons/я хочу пройти ещё раз.mp3",
+  homeBtn: "audio/buttons/к списку викторин.mp3",
+  nextBtn: "audio/buttons/дальше.mp3",
+  prevBtn: "audio/buttons/назад.mp3",
+  speakQuestionBtn: "audio/buttons/озвучить вопрос.mp3",
+  spaceNormal: "audio/buttons/каким будет интервал.mp3",
+  spaceWide: "audio/buttons/каким будет интервал.mp3",
+  spaceWidest: "audio/buttons/каким будет интервал.mp3",
+  scale95: "audio/buttons/какой будет масштаб.mp3",
+  scale100: "audio/buttons/какой будет масштаб.mp3",
+  scale110: "audio/buttons/какой будет масштаб.mp3",
+  themeBlue: "audio/buttons/какие будут цвета сайта.mp3",
+  themeLightDark: "audio/buttons/какие будут цвета сайта.mp3",
+  themeDarkLight: "audio/buttons/какие будут цвета сайта.mp3",
+  themeBook: "audio/buttons/какие будут цвета сайта.mp3",
+  themeBrownGreen: "audio/buttons/какие будут цвета сайта.mp3",
+  fontRange: "audio/buttons/размер шрифта.mp3"
+};
+
 function showScreen(screen) {
   [screenHome, screenIntro, screenRound, screenQuiz, screenResult].forEach((el) => {
     el.classList.add("hidden");
   });
   screen.classList.remove("hidden");
+}
+
+function withScrollLock(action) {
+  const y = window.scrollY;
+  action();
+  window.scrollTo({ top: y, left: 0, behavior: "auto" });
+}
+
+function toggleA11yPanel() {
+  const collapsed = a11yPanel.classList.toggle("collapsed");
+  a11yToggle.innerHTML = collapsed
+    ? "Показать настройки <span class=\"a11y-toggle-arrow\">▲</span>"
+    : "Скрыть настройки <span class=\"a11y-toggle-arrow\">▲</span>";
+  a11yToggle.setAttribute("aria-expanded", String(!collapsed));
 }
 
 function setActiveButton(buttons, activeButton) {
@@ -308,6 +348,52 @@ function stopAudio() {
     currentAudio.currentTime = 0;
     currentAudio = null;
   }
+}
+
+function stopHoverAudio() {
+  if (hoverAudioTimer) {
+    clearTimeout(hoverAudioTimer);
+    hoverAudioTimer = null;
+  }
+  if (hoverAudio) {
+    hoverAudio.pause();
+    hoverAudio.currentTime = 0;
+    hoverAudio = null;
+  }
+}
+
+function playHoverAudio(src) {
+  if (!src) return;
+  if (currentAudio && !currentAudio.paused) return;
+  stopHoverAudio();
+  hoverAudio = new Audio(src);
+  hoverAudio.volume = 1;
+  hoverAudio.play().catch(() => {});
+}
+
+function scheduleHoverAudio(src) {
+  if (!src) return;
+  stopHoverAudio();
+  hoverAudioTimer = setTimeout(() => {
+    playHoverAudio(src);
+  }, hoverDelayMs);
+}
+
+function bindHoverAudio(element, getSrc) {
+  if (!element) return;
+  const handleEnter = () => {
+    const src = typeof getSrc === "function" ? getSrc() : getSrc;
+    scheduleHoverAudio(src);
+  };
+  const handleLeave = () => {
+    stopHoverAudio();
+  };
+
+  element.addEventListener("mouseenter", handleEnter);
+  element.addEventListener("focus", handleEnter);
+  element.addEventListener("mouseleave", handleLeave);
+  element.addEventListener("blur", handleLeave);
+  element.addEventListener("click", handleLeave);
 }
 
 function playAudio(src, onEnd) {
@@ -531,7 +617,7 @@ function selectAnswer(index) {
   }
 
   state.answers[key] = saved;
-  renderQuestion({ silent: true });
+  withScrollLock(() => renderQuestion({ silent: true }));
 }
 
 function goNext() {
@@ -539,7 +625,7 @@ function goNext() {
   const round = testData.rounds[state.roundIndex];
   if (state.questionIndex < round.questions.length - 1) {
     state.questionIndex += 1;
-    renderQuestion();
+    withScrollLock(() => renderQuestion());
     return;
   }
 
@@ -562,7 +648,7 @@ function goPrev() {
     const prevRound = testData.rounds[state.roundIndex];
     state.questionIndex = prevRound.questions.length - 1;
   }
-  renderQuestion();
+  withScrollLock(() => renderQuestion());
 }
 
 function renderResultScreen() {
@@ -650,6 +736,7 @@ speakQuestionBtn.addEventListener("click", speakQuestion);
 
 toggleAnim.addEventListener("click", toggleAnimations);
 audioToggle.addEventListener("click", toggleAudioMode);
+a11yToggle.addEventListener("click", toggleA11yPanel);
 
 restartBtn.addEventListener("click", restartTest);
 homeBtn.addEventListener("click", goHome);
@@ -784,3 +871,18 @@ toggleAnim.setAttribute("aria-pressed", "true");
 audioToggle.setAttribute("aria-pressed", "true");
 applyA11ySettings(loadA11ySettings());
 showScreen(screenHome);
+
+// Озвучка интерфейсных кнопок по наведению с небольшой задержкой.
+Object.keys(hoverAudioMap).forEach((id) => {
+  const el = document.getElementById(id);
+  bindHoverAudio(el, hoverAudioMap[id]);
+});
+
+bindHoverAudio(toggleAnim, () => (
+  animEnabled
+    ? "audio/buttons/я не хочу анимации.mp3"
+    : "audio/buttons/анимации будут.mp3"
+));
+
+bindHoverAudio(screenHome, "audio/buttons/выбери викторину.mp3");
+bindHoverAudio(testKoshkin, "audio/buttons/кошкин дом.mp3");

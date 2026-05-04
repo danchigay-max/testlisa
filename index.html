@@ -23,31 +23,36 @@
     </div>
   </header>
 
-  <section class="a11y-panel" aria-label="Настройки отображения">
-    <div class="a11y-group a11y-font">
-      <span class="a11y-label">Размер шрифта:</span>
-      <input id="fontRange" class="font-range" type="range" min="85" max="130" step="5" value="100" aria-label="Размер шрифта" />
-      <span class="font-range-value" id="fontRangeValue">100%</span>
+  <section class="a11y-panel" id="a11yPanel" aria-label="Настройки отображения">
+    <div class="a11y-content" id="a11yContent">
+      <div class="a11y-group a11y-font">
+        <span class="a11y-label">Размер шрифта:</span>
+        <input id="fontRange" class="font-range" type="range" min="85" max="130" step="5" value="100" aria-label="Размер шрифта" />
+        <span class="font-range-value" id="fontRangeValue">100%</span>
+      </div>
+      <div class="a11y-group a11y-spacing">
+        <span class="a11y-label">Интервал:</span>
+        <button class="a11y-btn" id="spaceNormal" type="button">Обычный</button>
+        <button class="a11y-btn" id="spaceWide" type="button">Шире</button>
+        <button class="a11y-btn" id="spaceWidest" type="button">Макс</button>
+      </div>
+      <div class="a11y-group a11y-scale">
+        <span class="a11y-label">Масштаб:</span>
+        <button class="a11y-btn" id="scale95" type="button">95%</button>
+        <button class="a11y-btn is-active" id="scale100" type="button">100%</button>
+        <button class="a11y-btn" id="scale110" type="button">110%</button>
+      </div>
+      <div class="a11y-group a11y-theme">
+        <span class="a11y-label">Цвета сайта:</span>
+        <button class="theme-btn" id="themeBlue" type="button" title="Синяя тема">С</button>
+        <button class="theme-btn" id="themeLightDark" type="button" title="Белый фон, черный текст">Б</button>
+        <button class="theme-btn" id="themeDarkLight" type="button" title="Черный фон, белый текст">Ч</button>
+        <button class="theme-btn" id="themeBook" type="button" title="Теплая страница книги">К</button>
+        <button class="theme-btn" id="themeBrownGreen" type="button" title="Коричнево-зеленая тема">З</button>
+      </div>
     </div>
-    <div class="a11y-group a11y-spacing">
-      <span class="a11y-label">Интервал:</span>
-      <button class="a11y-btn" id="spaceNormal" type="button">Обычный</button>
-      <button class="a11y-btn" id="spaceWide" type="button">Шире</button>
-      <button class="a11y-btn" id="spaceWidest" type="button">Макс</button>
-    </div>
-    <div class="a11y-group a11y-scale">
-      <span class="a11y-label">Масштаб:</span>
-      <button class="a11y-btn" id="scale95" type="button">95%</button>
-      <button class="a11y-btn is-active" id="scale100" type="button">100%</button>
-      <button class="a11y-btn" id="scale110" type="button">110%</button>
-    </div>
-    <div class="a11y-group a11y-theme">
-      <span class="a11y-label">Цвета сайта:</span>
-      <button class="theme-btn" id="themeBlue" type="button" title="Синяя тема">С</button>
-      <button class="theme-btn" id="themeLightDark" type="button" title="Белый фон, черный текст">Б</button>
-      <button class="theme-btn" id="themeDarkLight" type="button" title="Черный фон, белый текст">Ч</button>
-      <button class="theme-btn" id="themeBook" type="button" title="Теплая страница книги">К</button>
-      <button class="theme-btn" id="themeBrownGreen" type="button" title="Коричнево-зеленая тема">З</button>
+    <div class="a11y-toggle-bar">
+      <button class="a11y-toggle" id="a11yToggle" type="button" aria-expanded="true">Скрыть настройки <span class="a11y-toggle-arrow">▲</span></button>
     </div>
   </section>
 
